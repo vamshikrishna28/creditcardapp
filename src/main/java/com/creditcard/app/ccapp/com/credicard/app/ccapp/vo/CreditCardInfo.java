@@ -2,19 +2,18 @@ package com.creditcard.app.ccapp.com.credicard.app.ccapp.vo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class CreditCardInfo implements Serializable {
 
-    private String nickname;
-    private String cardType;
-    private String cardSubType;
-    private String cardHolderName;
-    private String id;
-    private Date createDate;
-    private Date updateDate;
-    private String userId;
-    private String creditCardNumber;
+    String nickname;
+    String cardType;
+    String cardSubType;
+    String cardHolderName;
+    String id;
+    Timestamp createDate;
+    Timestamp updateDate;
+    String userId;
+    String creditCardNumber;
 
     public String getNickname() {
         return nickname;
@@ -56,20 +55,16 @@ public class CreditCardInfo implements Serializable {
         this.id = id;
     }
 
-    public Date getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 
     public void setUpdateDate(Timestamp updateDate) {

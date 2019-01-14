@@ -20,6 +20,8 @@
                     document.getElementById("result").innerHTML = "Unable to add the credit card";
                 }else if (xhttp.status === 409) {
                     document.getElementById("result").innerHTML = "Looks like the credit card already exists";
+                }else{
+                    document.getElementById("result").innerHTML = "There is something wrong with the request";
                 }
             };
             xhttp.send(constructJSON());
@@ -36,7 +38,7 @@
 </head>
 <body>
 <h1>Add credit card details</h1>
-<br><br><br><br>
+<br>
     <form>
     Nick name:
     <input type="text" name="nickName" id="nickName"><br>

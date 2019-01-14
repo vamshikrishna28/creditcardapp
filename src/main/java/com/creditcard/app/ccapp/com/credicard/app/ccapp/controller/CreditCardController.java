@@ -16,7 +16,7 @@ public class CreditCardController {
     @Autowired
     CreditCardService creditCardService;
 
-    @GetMapping("/creditcard/search")
+    @GetMapping("/creditcard/search" )
     public ResponseEntity<?> getCreditCard(@RequestBody CreditCardInfo creditCardInfo){
         List<CreditCardInfo> creditCardInfoList = creditCardService.searchCreditCard(creditCardInfo);
         if(creditCardInfoList.isEmpty())
