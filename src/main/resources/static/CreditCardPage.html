@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <title>Credit Card Application</title>
 
+        <script>
+        function saveCreditCard() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "http://localhost:8080/api/creditcard/", false);
+            xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            xhttp.onload = function () {
+                if (xhttp.readyState === xhttp.DONE) {
+                    if (xhttp.status === 200)
+                        document.getElementById("result").innerHTML = "Successfully saved the credit card";
+                }
+            };
+            xhttp.onreadystatechange = function()  {
+                if (xhttp.status === 404) {
+                    document.getElementById("result").innerHTML = "Unable to add the credit card";
+                }else if (xhttp.status === 409) {
+                    document.getElementById("result").innerHTML = "Looks like the credit card already exists";
+                }
+            };
+            xhttp.send(constructJSON());
+        }
 
+        function  constructJSON(){
+            var creditCardObj = new Object();
+            creditCardObj.nickname = document.getElementById("nickName").value;
+            creditCardObj.cardHolderName = document.getElementById("cardHolderName").value;
+            creditCardObj.creditCardNumber = document.getElementById("cardNumber").value;
+            return JSON.stringify(creditCardObj);
+        }
+    </script>
 </head>
 <body>
-
+<h1>Add credit card details</h1>
+<br><br><br><br>
+    <form>
+    Nick name:
+    <input type="text" name="nickName" id="nickName"><br>
+    Name on card:
+    <input type="text" name="cardHolderName" id="cardHolderName" required><br>
+    Card Number:
+    <input type="number" name="cardNumber" id="cardNumber" required><br>
+    <input type="hidden" name="id">
+    <input type="button" value="Save" onclick="saveCreditCard()">
+        <br>
+        <br>
+        <label id="result"></label>
+    </form>
 </body>
 </html>

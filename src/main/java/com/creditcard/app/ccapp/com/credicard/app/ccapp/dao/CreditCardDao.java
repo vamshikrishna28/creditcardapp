@@ -1,13 +1,14 @@
 package com.creditcard.app.ccapp.com.credicard.app.ccapp.dao;
 
 import com.creditcard.app.ccapp.com.credicard.app.ccapp.entity.CreditCardEntity;
-import com.creditcard.app.ccapp.com.credicard.app.ccapp.vo.CreditCardInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -21,24 +22,26 @@ public class CreditCardDao {
         return sessionFactory.getCurrentSession();
     }
 
-    public void persist(CreditCardInfo creditCardInfo){
+    public void persist(CreditCardEntity creditCardInfo){
         getSession().persist(creditCardInfo);
     }
 
-    public List<CreditCardInfo> getCreditCard(CreditCardInfo creditCardInfo){
-        return getSession().createQuery("").getResultList();
+    public List<CreditCardEntity> getAllCreditCard(){
+        return getSession().createQuery("select cc from CreditCardEntity cc",CreditCardEntity.class).getResultList();
     }
 
-    public void delete(CreditCardInfo creditCardInfo){
+    public void delete(CreditCardEntity creditCardInfo){
         getSession().remove(creditCardInfo);
     }
 
-    public void update(CreditCardInfo creditCardInfo){
+    public void update(CreditCardEntity creditCardInfo){
         getSession().merge(creditCardInfo);
     }
 
-    public void find(CreditCardInfo creditCardInfo){
-        getSession().find(CreditCardEntity.class,creditCardInfo);
+    public List<CreditCardEntity> find(CreditCardEntity creditCardInfo){
+        Query query = getSession().createQuery("select cc from CreditCardEntity cc where cc.cardNumber = :cardNumber");
+        query.setParameter("cardNumber", creditCardInfo.getCardNumber());
+        return query.getResultList();
     }
 
 }

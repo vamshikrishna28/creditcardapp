@@ -32,7 +32,7 @@ public class AppConfig {
         dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
         dataSource.setUrl("jdbc:hsqldb:mem:xdb");
         dataSource.setUsername("sa");
-        dataSource.setPassword("capp");
+        dataSource.setPassword("ccapp");
         return dataSource;
     }
 }

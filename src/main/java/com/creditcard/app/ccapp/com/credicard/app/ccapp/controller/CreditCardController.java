@@ -22,12 +22,12 @@ public class CreditCardController {
         if(creditCardInfoList.isEmpty())
             return new ResponseEntity<>("Sorry unable to find the Credit Card!!!!",HttpStatus.NOT_FOUND);
         else
-            return new ResponseEntity<CreditCardInfo>(creditCardInfoList.get(0), HttpStatus.OK);
+            return new ResponseEntity<>(creditCardInfoList.get(0), HttpStatus.OK);
     }
 
     @GetMapping("/creditcard/")
-    public ResponseEntity<?> getAllCreditCard(@RequestBody CreditCardInfo creditCardInfo){
-        List<CreditCardInfo> creditCardInfoList = creditCardService.searchCreditCard(creditCardInfo);
+    public ResponseEntity<?> getAllCreditCard(){
+        List<CreditCardInfo> creditCardInfoList = creditCardService.getAllCreditCards();
         if(creditCardInfoList.isEmpty())
             return new ResponseEntity<>("Sorry unable to find the Credit Card!!!!",HttpStatus.NOT_FOUND);
         else
@@ -41,7 +41,7 @@ public class CreditCardController {
         }else {
             creditCardService.saveCreditCard(creditCardInfo);
         }
-        return null;
+        return new ResponseEntity<>("Successfully saved the credit card", HttpStatus.OK);
     }
 
     @PutMapping("/creditcard/")
@@ -50,11 +50,10 @@ public class CreditCardController {
         if(creditCardInfoList.isEmpty())
             return new ResponseEntity<>("Sorry unable to find the Credit Card for update!!!!",HttpStatus.NOT_FOUND);
         creditCardService.updateCreditCard(creditCardInfo);
-            //return new ResponseEntity<>("Sorry unable to update the credit card",HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>("Successfully updated the credit card", HttpStatus.OK);
-        }
+    }
 
-    @DeleteMapping("/creditcard/{id}")
+    @DeleteMapping("/creditcard/")
     public ResponseEntity deleteCreditCard(@RequestBody CreditCardInfo creditCardInfo){
         creditCardService.deleteCreditCard(creditCardInfo);
         return  new ResponseEntity("Successfully deleted the credit card", HttpStatus.NO_CONTENT);

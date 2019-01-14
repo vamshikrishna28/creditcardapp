@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Card Application</title>
+    <script>
+        window.onload = function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/api/creditcard/", false);
+            xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+            xhttp.onload = function () {
+                if (xhttp.readyState === xhttp.DONE) {
+                    if (xhttp.status === 200) {
+                        var responseResult = JSON.parse(xhttp.responseText);
+                        for (var i = 0; i < responseResult.length; i++) {
+                            var resultRow = responseResult[i];
+                            var tableElement = document.getElementById("resultset");
+                            var tableRow = tableElement.appendChild(document.createElement("tr"));
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.id;
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.creditCardNumber;
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.cardHolderName;
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.cardType;
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.cardSubType;
+                            tableRow.appendChild(document.createElement("td")).innerHTML = resultRow.nickname;
+                        }
+                    }
+                }
+            };
+            xhttp.onreadystatechange = function() {
+                if (xhttp.status === 404) {
+                    var tableElement = document.getElementById("resultset");
+                    var tableRow = tableElement.appendChild(document.createElement("tr"));
+                    var tableData = tableRow.appendChild(document.createElement("td"));
+                    tableData.setAttribute("colspan", "6");
+                    tableData.innerHTML = "There are no credit cards saved in the database";
+                }
+            };
+                xhttp.send();
+        };
+    </script>
+</head>
+<body>
+<h1>Add credit card details</h1>
+<br><br><br><br>
+    <table id="resultset" border="1">
+        <thead>
+        <tr>
+        <th hidden>Id</th>
+        <th>Credit Card Number</th>
+        <th>Name on Credit Card</th>
+        <th>Card Type</th>
+        <th>Card Sub Type</th>
+        <th>Nick Name</th>
+        </tr>
+        </thead>
+    </table>
+</body>
+</html>
