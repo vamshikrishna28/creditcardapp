@@ -22,8 +22,9 @@ public class CreditCardDao {
         return sessionFactory.getCurrentSession();
     }
 
-    public void persist(CreditCardEntity creditCardInfo){
+    public CreditCardEntity persist(CreditCardEntity creditCardInfo){
         getSession().persist(creditCardInfo);
+        return creditCardInfo;
     }
 
     public List<CreditCardEntity> getAllCreditCard(){

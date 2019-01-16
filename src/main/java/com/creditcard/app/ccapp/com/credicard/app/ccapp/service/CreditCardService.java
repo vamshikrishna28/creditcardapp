@@ -17,11 +17,12 @@ public class CreditCardService {
     @Autowired
     CreditCardDao creditCardDao;
 
-    public void saveCreditCard(CreditCardInfo creditCardInfo){
+    public CreditCardInfo saveCreditCard(CreditCardInfo creditCardInfo){
         ModelMapper modelMapper = new ModelMapper();
         CreditCardEntity creditCardEntity = modelMapper.map(creditCardInfo, CreditCardEntity.class);
         determineCardInformation(creditCardEntity);
         creditCardDao.persist(creditCardEntity);
+        return modelMapper.map(creditCardEntity,CreditCardInfo.class);
     }
 
     private void determineCardInformation(CreditCardEntity creditCardEntity) {

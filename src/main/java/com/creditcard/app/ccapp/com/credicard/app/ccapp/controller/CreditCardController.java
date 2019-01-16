@@ -53,8 +53,14 @@ public class CreditCardController {
         return new ResponseEntity<>("Successfully updated the credit card", HttpStatus.OK);
     }
 
-    @DeleteMapping("/creditcard/")
-    public ResponseEntity deleteCreditCard(@RequestBody CreditCardInfo creditCardInfo){
+    //@DeleteMapping("/creditcard/{id}")
+    @RequestMapping(
+            value = "/creditcard/{id}",
+            produces = "application/json",
+            method = RequestMethod.DELETE)
+    public ResponseEntity deleteCreditCard(@RequestParam String id){
+        CreditCardInfo creditCardInfo = new CreditCardInfo();
+        creditCardInfo.setId(Long.parseLong(id));
         creditCardService.deleteCreditCard(creditCardInfo);
         return  new ResponseEntity("Successfully deleted the credit card", HttpStatus.NO_CONTENT);
     }

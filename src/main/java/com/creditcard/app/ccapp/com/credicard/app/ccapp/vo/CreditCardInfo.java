@@ -9,7 +9,7 @@ public class CreditCardInfo implements Serializable {
     String cardType;
     String cardSubType;
     String cardHolderName;
-    String id;
+    Long id;
     Timestamp createDate;
     Timestamp updateDate;
     String userId;
@@ -47,11 +47,11 @@ public class CreditCardInfo implements Serializable {
         this.cardHolderName = cardHolderName;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
